@@ -381,7 +381,7 @@ function Decoder(bytes, port) {
 }
 
 // let payload = [{ variable: 'payload', value: '9E1B4515969000553450272020'}]
-const payload_raw = payload.find(x => x.variable === 'payload' || x.variable === 'payload_raw' || x.variable === 'data');
+const payload_raw = payload.find(x => x.variable === 'payload' || x.variable === 'payload_raw');
 if (payload_raw) {
   // Get a unique serie for the incoming data.
   const serie = payload_raw.serie || new Date().getTime();
