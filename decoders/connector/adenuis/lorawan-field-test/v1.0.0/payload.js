@@ -384,7 +384,7 @@ function Decoder(bytes, port) {
 const payload_raw = payload.find(x => x.variable === 'payload' || x.variable === 'payload_raw');
 if (payload_raw) {
   // Get a unique serie for the incoming data.
-  const serie = payload_raw.serie || new Date().getTime();
+  const serie = payload_raw.group || payload_raw.serie || new Date().getTime();
   let vars_to_tago = [];
   // Parse the payload from your sensor to function parsePayload
   try {
