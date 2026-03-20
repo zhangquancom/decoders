@@ -8,7 +8,7 @@
   },
   "device_parameters": [],
   "middleware_endpoint": {
-    "us-e1": "digixon.middleware.us-e1.tago.io",
-    "eu-w1": "digixon.middleware.eu-w1.tago.io"
+    "us-e1": "digi-xon.middleware.us-e1.tago.io",
+    "eu-w1": "digi-xon.middleware.eu-w1.tago.io"
   }
 }
