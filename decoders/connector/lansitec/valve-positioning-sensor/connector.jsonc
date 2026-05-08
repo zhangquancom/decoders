@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../../schema/connector.json",
+  "name": "Lansitec Valve Positioning Sensor",
+  "images": {
+    "logo": "./assets/logo.png"
+  },
+  "versions": {
+    "v1.0.1": {
+      "src": "./v1.0.1/payload.ts",
+      "manifest": "./v1.0.1/payload-config.jsonc"
+    }
+  }
+}

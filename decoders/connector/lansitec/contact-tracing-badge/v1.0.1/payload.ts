@@ -348,8 +348,7 @@ function Heartbeat_proc(bytes: Buffer) {
       break;
 
     case 0x08:
-      Heartbeat_Msg.buzzerAndvibrator =
-        "disable beacon-in-tracker and proximity detection";
+      Heartbeat_Msg.buzzerAndvibrator = "disable beacon-in-tracker and proximity detection";
       break;
 
     default:
@@ -551,10 +550,8 @@ function Heartbeat_proc(bytes: Buffer) {
   Heartbeat_Msg.friendnum = bytes[11] & 0x0f;
   for (let i = 0; i < Heartbeat_Msg.friendnum; i++) {
     const tmp = i + 1;
-    Heartbeat_Msg[`dev${tmp}major`] =
-      ((bytes[12 + 4 * i] << 8) & 0xff00) | (bytes[13 + 4 * i] & 0xff);
-    Heartbeat_Msg[`dev${tmp}minor`] =
-      ((bytes[14 + 4 * i] << 8) & 0xff00) | (bytes[15 + 4 * i] & 0xff);
+    Heartbeat_Msg[`dev${tmp}major`] = ((bytes[12 + 4 * i] << 8) & 0xff00) | (bytes[13 + 4 * i] & 0xff);
+    Heartbeat_Msg[`dev${tmp}minor`] = ((bytes[14 + 4 * i] << 8) & 0xff00) | (bytes[15 + 4 * i] & 0xff);
   }
   return Heartbeat_Msg;
 }
@@ -572,16 +569,12 @@ function TenSecInstantReportMode_proc(bytes: Buffer) {
   }
   for (let i = 0; i < TenSecInstantReportMode_Msg.length; i++) {
     const tmp = i + 1;
-    TenSecInstantReportMode_Msg[`dev${tmp}major`] =
-      ((bytes[1 + 5 * i] << 8) & 0xff00) | (bytes[2 + 5 * i] & 0xff);
-    TenSecInstantReportMode_Msg[`dev${tmp}minor`] =
-      ((bytes[3 + 5 * i] << 8) & 0xff00) | (bytes[4 + 5 * i] & 0xff);
-    TenSecInstantReportMode_Msg[`dev${tmp}beacontype`] =
-      (bytes[5 + 5 * i] >> 7) & 0x01;
+    TenSecInstantReportMode_Msg[`dev${tmp}major`] = ((bytes[1 + 5 * i] << 8) & 0xff00) | (bytes[2 + 5 * i] & 0xff);
+    TenSecInstantReportMode_Msg[`dev${tmp}minor`] = ((bytes[3 + 5 * i] << 8) & 0xff00) | (bytes[4 + 5 * i] & 0xff);
+    TenSecInstantReportMode_Msg[`dev${tmp}beacontype`] = (bytes[5 + 5 * i] >> 7) & 0x01;
     switch (TenSecInstantReportMode_Msg[`dev${tmp}beacontype`]) {
       case 0x00:
-        TenSecInstantReportMode_Msg[`dev${tmp}beacontype`] =
-          "beacon-in-tracker";
+        TenSecInstantReportMode_Msg[`dev${tmp}beacontype`] = "beacon-in-tracker";
         break;
 
       case 0x01:
@@ -626,49 +619,30 @@ function EightySecPeriodicReportMode_proc(bytes: Buffer) {
     if (bytes[i] === 0xff && bytes[i + 1] === 0xff) {
       i += 2;
       for (let j = 1; j <= EightySecPeriodicReportMode_Msg.length; j++) {
-        EightySecPeriodicReportMode_Msg[`beacon${j}minor`] =
-          ((bytes[i++] << 8) & 0xff00) | (bytes[i++] & 0xff);
+        EightySecPeriodicReportMode_Msg[`beacon${j}minor`] = ((bytes[i++] << 8) & 0xff00) | (bytes[i++] & 0xff);
         EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon`] = bytes[i];
-        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_0_9`] =
-          bytes[i] & 0x01;
-        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_10_19`] =
-          (bytes[i] >> 1) & 0x01;
-        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_20_19`] =
-          (bytes[i] >> 2) & 0x01;
-        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_30_19`] =
-          (bytes[i] >> 3) & 0x01;
-        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_40_19`] =
-          (bytes[i] >> 4) & 0x01;
-        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_50_19`] =
-          (bytes[i] >> 5) & 0x01;
-        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_60_19`] =
-          (bytes[i] >> 6) & 0x01;
-        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_70_19`] =
-          (bytes[i++] >> 7) & 0x01;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_0_9`] = bytes[i] & 0x01;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_10_19`] = (bytes[i] >> 1) & 0x01;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_20_19`] = (bytes[i] >> 2) & 0x01;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_30_19`] = (bytes[i] >> 3) & 0x01;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_40_19`] = (bytes[i] >> 4) & 0x01;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_50_19`] = (bytes[i] >> 5) & 0x01;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_60_19`] = (bytes[i] >> 6) & 0x01;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_70_19`] = (bytes[i++] >> 7) & 0x01;
       }
       return EightySecPeriodicReportMode_Msg;
     }
-    EightySecPeriodicReportMode_Msg[`badge${k}major`] =
-      ((bytes[i++] << 8) & 0xff00) | (bytes[i++] & 0xff);
-    EightySecPeriodicReportMode_Msg[`badge${k}minor`] =
-      ((bytes[i++] << 8) & 0xff00) | (bytes[i++] & 0xff);
+    EightySecPeriodicReportMode_Msg[`badge${k}major`] = ((bytes[i++] << 8) & 0xff00) | (bytes[i++] & 0xff);
+    EightySecPeriodicReportMode_Msg[`badge${k}minor`] = ((bytes[i++] << 8) & 0xff00) | (bytes[i++] & 0xff);
     EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge`] = bytes[i];
-    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_0_9`] =
-      bytes[i] & 0x01;
-    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_10_19`] =
-      (bytes[i] >> 1) & 0x01;
-    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_20_29`] =
-      (bytes[i] >> 2) & 0x01;
-    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_30_39`] =
-      (bytes[i] >> 3) & 0x01;
-    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_40_49`] =
-      (bytes[i] >> 4) & 0x01;
-    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_50_59`] =
-      (bytes[i] >> 5) & 0x01;
-    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_60_69`] =
-      (bytes[i] >> 6) & 0x01;
-    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_70_79`] =
-      (bytes[i++] >> 7) & 0x01;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_0_9`] = bytes[i] & 0x01;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_10_19`] = (bytes[i] >> 1) & 0x01;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_20_29`] = (bytes[i] >> 2) & 0x01;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_30_39`] = (bytes[i] >> 3) & 0x01;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_40_49`] = (bytes[i] >> 4) & 0x01;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_50_59`] = (bytes[i] >> 5) & 0x01;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_60_69`] = (bytes[i] >> 6) & 0x01;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_70_79`] = (bytes[i++] >> 7) & 0x01;
   }
 
   return EightySecPeriodicReportMode_Msg;
@@ -737,12 +711,7 @@ function toTagoFormat(object_item: any, group: any, prefix = "") {
 // const payload = [{ variable: "payload", value: "d101 "}];
 //console.log(payload);
 
-const data = payload.find(
-  (x) =>
-    x.variable === "payload_raw" ||
-    x.variable === "payload" ||
-    x.variable === "data"
-);
+const data = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 
 if (data) {
   const buffer = Buffer.from(data.value, "hex");

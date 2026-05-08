@@ -62,14 +62,11 @@ function decodeRegistration(bytes: Buffer) {
   data.power = `${(bytes[2] >> 3) & 0x1f}dBm`;
   // `${(bytes[2] >> 3) & 0x1f}dBm`;
   // continuousBleReceiveEnable
-  data.continuousBleReceiveEnable =
-    ((bytes[2] >> 1) & 0x1) === 0 ? "Disable" : "Enable";
+  data.continuousBleReceiveEnable = ((bytes[2] >> 1) & 0x1) === 0 ? "Disable" : "Enable";
   // dr
   data.dr = (bytes[3] >> 4) & 0x0f;
   // positionReportInterval
-  data.positionReportInterval = `${
-    (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5
-  }s`;
+  data.positionReportInterval = `${(((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5}s`;
   //(((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5 ;
   // heartbeatInterval
   data.heartbeatInterval = `${bytes[6] * 30}s`;
@@ -126,8 +123,7 @@ function decodeDeviceReportRule(bytes: Buffer) {
     const startAddress = bytes[index++] & 0xff;
     const endAddress = bytes[index++] & 0xff;
     const filter: any = {};
-    const payload =
-      "0201061AFF4C000215F2A52D43E0AB489CB64C4A8300146720AABBCCCCB3";
+    const payload = "0201061AFF4C000215F2A52D43E0AB489CB64C4A8300146720AABBCCCCB3";
     if (ruleType === 1) {
       filter.ruleType = "FilterBlock";
       filter.startAddress = byteToHex(startAddress);
@@ -162,14 +158,8 @@ function decodeDeviceType1(bytes: Buffer) {
 
   for (let i = 0; i < data.number; i++) {
     const index = 1 + 5 * i;
-    const major = ((bytes[index] << 8) | bytes[index + 1])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
-    const minor = ((bytes[index + 2] << 8) | bytes[index + 3])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
+    const major = ((bytes[index] << 8) | bytes[index + 1]).toString(16).toUpperCase().padStart(4, "0");
+    const minor = ((bytes[index + 2] << 8) | bytes[index + 3]).toString(16).toUpperCase().padStart(4, "0");
     const rssi = bytes[index + 4] - 256;
 
     data[`beacon${i + 1}`] = major + minor;
@@ -188,14 +178,8 @@ function decodeDeviceType2(bytes: Buffer) {
 
   for (let i = 0; i < data.number; i++) {
     const index = 1 + 5 * i;
-    const major = ((bytes[index] << 8) | bytes[index + 1])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
-    const minor = ((bytes[index + 2] << 8) | bytes[index + 3])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
+    const major = ((bytes[index] << 8) | bytes[index + 1]).toString(16).toUpperCase().padStart(4, "0");
+    const minor = ((bytes[index + 2] << 8) | bytes[index + 3]).toString(16).toUpperCase().padStart(4, "0");
     const rssi = bytes[index + 4] - 256;
 
     data[`beacon${i + 1}`] = major + minor;
@@ -214,14 +198,8 @@ function decodeDeviceType3(bytes: Buffer) {
 
   for (let i = 0; i < data.number; i++) {
     const index = 1 + 5 * i;
-    const major = ((bytes[index] << 8) | bytes[index + 1])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
-    const minor = ((bytes[index + 2] << 8) | bytes[index + 3])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
+    const major = ((bytes[index] << 8) | bytes[index + 1]).toString(16).toUpperCase().padStart(4, "0");
+    const minor = ((bytes[index + 2] << 8) | bytes[index + 3]).toString(16).toUpperCase().padStart(4, "0");
     const rssi = bytes[index + 4] - 256;
 
     data[`beacon${i + 1}`] = major + minor;
@@ -241,14 +219,8 @@ function decodeMultiDeviceTypeMessage(bytes: Buffer) {
   for (let i = 0; i < data.number; i++) {
     const index = 1 + 6 * i;
     const deviceTypeId = bytes[index];
-    const major = ((bytes[index + 1] << 8) | bytes[index + 2])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
-    const minor = ((bytes[index + 3] << 8) | bytes[index + 4])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
+    const major = ((bytes[index + 1] << 8) | bytes[index + 2]).toString(16).toUpperCase().padStart(4, "0");
+    const minor = ((bytes[index + 3] << 8) | bytes[index + 4]).toString(16).toUpperCase().padStart(4, "0");
     const rssi = bytes[index + 5] - 256;
 
     data[`deviceTypeId${i + 1}`] = deviceTypeId;
@@ -303,12 +275,7 @@ function toTagoFormat(object_item: any, group: any, prefix = "") {
   return result;
 }
 
-const data = payload.find(
-  (x) =>
-    x.variable === "payload_raw" ||
-    x.variable === "payload" ||
-    x.variable === "data"
-);
+const data = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 
 if (data) {
   const buffer = Buffer.from(data.value, "hex");

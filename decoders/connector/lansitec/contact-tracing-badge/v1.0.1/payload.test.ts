@@ -1,8 +1,7 @@
-import { describe, test, expect } from "vitest";
+import { describe, expect, test } from "vitest";
 import { decoderRun } from "../../../../../src/functions/decoder-run";
 
-const file_path =
-  "decoders/connector/lansitec/contact-tracing-badge/v1.0.1/payload.ts" as const;
+const file_path = "decoders/connector/lansitec/contact-tracing-badge/v1.0.1/payload.ts" as const;
 
 function preparePayload(payloadHex: string) {
   let payload: {
@@ -22,9 +21,7 @@ function preparePayload(payloadHex: string) {
   const chgstate = payload.find((item) => item.variable === "chgstate");
   const crc = payload.find((item) => item.variable === "crc");
   const mode = payload.find((item) => item.variable === "mode");
-  const buzzerAndvibrator = payload.find(
-    (item) => item.variable === "buzzerAndvibrator"
-  );
+  const buzzerAndvibrator = payload.find((item) => item.variable === "buzzerAndvibrator");
   const range = payload.find((item) => item.variable === "range");
   const BleTxPower = payload.find((item) => item.variable === "BleTxPower");
   const threshold = payload.find((item) => item.variable === "threshold");
@@ -62,9 +59,7 @@ describe("Contact tracing badge heartbeat unit tests", () => {
     expect(result.chgstate?.value).toBe("Charge completed");
     expect(result.crc?.value).toBe(0);
     expect(result.mode?.value).toBe("no action");
-    expect(result.buzzerAndvibrator?.value).toBe(
-      "vibrator enable and buzzer full"
-    );
+    expect(result.buzzerAndvibrator?.value).toBe("vibrator enable and buzzer full");
     expect(result.range?.value).toBe("-58dBm~-72dBm");
     expect(result.BleTxPower?.value).toBe(4);
     expect(result.threshold?.value).toBe(-77);
@@ -83,8 +78,6 @@ describe("Shall not be parsed", () => {
   });
 
   test("Not parsed Result", () => {
-    expect(payload).toEqual([
-      { variable: "shallnotpass", value: "04096113950292" },
-    ]);
+    expect(payload).toEqual([{ variable: "shallnotpass", value: "04096113950292" }]);
   });
 });

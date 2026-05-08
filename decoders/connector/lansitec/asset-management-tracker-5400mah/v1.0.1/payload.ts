@@ -373,11 +373,7 @@ function PeriodicalPosition_proc(bytes: Buffer) {
   };
   //time
   PeriodicalPposition_Msg.time = {
-    value:
-      ((bytes[9] << 24) & 0xff000000) |
-      ((bytes[10] << 16) & 0xff0000) |
-      ((bytes[11] << 8) & 0xff00) |
-      (bytes[12] & 0xff),
+    value: ((bytes[9] << 24) & 0xff000000) | ((bytes[10] << 16) & 0xff0000) | ((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff),
     unit: "sec",
   };
   PeriodicalPposition_Msg.location = {
@@ -420,11 +416,7 @@ function OnDemandPosition_proc(bytes: Buffer) {
   //lat = lat > 0x7fffffff ? lat - 0x100000000 : lat; // 0xCA5B1700 (-90) to 0x35A4E900 (90)
   OnDemandPosition_Msg.latitude = lat;
   //time
-  OnDemandPosition_Msg.time =
-    ((bytes[10] << 24) & 0xff000000) |
-    ((bytes[11] << 16) & 0xff0000) |
-    ((bytes[12] << 8) & 0xff00) |
-    (bytes[13] & 0xff);
+  OnDemandPosition_Msg.time = ((bytes[10] << 24) & 0xff000000) | ((bytes[11] << 16) & 0xff0000) | ((bytes[12] << 8) & 0xff00) | (bytes[13] & 0xff);
   OnDemandPosition_Msg.location = `${lat},${lng}`;
   return OnDemandPosition_Msg;
 }
@@ -462,11 +454,7 @@ function HistoryPosition_proc(bytes: Buffer) {
   //location
   HistoryPositon_Msg.location = `${lat},${lng}`;
   //time
-  HistoryPositon_Msg.time =
-    ((bytes[9] << 24) & 0xff000000) |
-    ((bytes[10] << 16) & 0xff0000) |
-    ((bytes[11] << 8) & 0xff00) |
-    (bytes[12] & 0xff);
+  HistoryPositon_Msg.time = ((bytes[9] << 24) & 0xff000000) | ((bytes[10] << 16) & 0xff0000) | ((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff);
   //It's P2P message, need to calcuate the real length.
   if (HistoryPositon_Msg.length === 0x0f) {
     return null;
@@ -543,10 +531,8 @@ function BleCoordinate_proc(bytes: Buffer) {
   BleCoordinate_Msg.move = bytes[1];
   // BleCoordinate_Msg.rfu = ((bytes[2] << 24) & 0xFF000000) | ((bytes[3] << 16) & 0x00FF0000) | ((bytes[4] << 8) & 0x0000FF00) | (bytes[5] & 0x000000FF);
   for (let i = 0; i < BleCoordinate_Msg.length; i++) {
-    BleCoordinate_Msg[`dev${i + 1}major`] =
-      ((bytes[6 + 5 * i] << 8) & 0xff00) | (bytes[7 + 5 * i] & 0xff);
-    BleCoordinate_Msg[`dev${i + 1}minor`] =
-      ((bytes[8 + 5 * i] << 8) & 0xff00) | (bytes[9 + 5 * i] & 0xff);
+    BleCoordinate_Msg[`dev${i + 1}major`] = ((bytes[6 + 5 * i] << 8) & 0xff00) | (bytes[7 + 5 * i] & 0xff);
+    BleCoordinate_Msg[`dev${i + 1}minor`] = ((bytes[8 + 5 * i] << 8) & 0xff00) | (bytes[9 + 5 * i] & 0xff);
     BleCoordinate_Msg[`dev${i + 1}rssi`] = {
       value: bytes[10 + 5 * i] - 256,
       unit: "dBm",
@@ -623,12 +609,7 @@ function toTagoFormat(object_item: any, group: any, prefix = "") {
 // const payload = [{ variable: "payload", value: "5142ed8a9c41ffce2f605b92a7000103ff000f" }]; // positive lng negative lat for type 5
 // const payload = [{ variable: "payload", value: "7100000000000005000348" }]; // type 7
 
-const data = payload.find(
-  (x) =>
-    x.variable === "payload_raw" ||
-    x.variable === "payload" ||
-    x.variable === "data"
-);
+const data = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 
 if (data) {
   const buffer = Buffer.from(data.value, "hex");
