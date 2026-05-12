@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { decoderRun } from "../../../../../src/functions/decoder-run";
 
-const file_path = "decoders/connector/lansitec/cat1-flex-tracker/v1.0.0/payload.ts" as const;
+const file_path = "decoders/connector/lansitec/nb-iot-compact-bluetooth-gateway/v1.0.0/payload.ts" as const;
 
 function preparePayload(payloadHex: string) {
   let payload: {

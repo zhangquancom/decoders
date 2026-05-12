@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "Elevate your indoor asset and personnel tracking with the Lansitec Indoor Bluetooth Gateway. Designed around Bluetooth 5.0 technology and WiFi, this gateway ensures seamless data transmission without additional network fees—even across long distances. By collecting beacon signals from badges, bracelets, and various BLE sensors, it provides real-time insights into locations, movements, and environmental conditions. Whether you’re managing security staff, monitoring warehouse inventory, or overseeing event operations, the Indoor Bluetooth Gateway delivers low-power, high-efficiency connectivity to help you stay informed and in control.",
+  "install_text": "Elevate your indoor asset and personnel tracking with the Lansitec Indoor Bluetooth Gateway. Designed around Bluetooth 5.0 technology and WiFi, this gateway ensures seamless data transmission without additional network fees— even across long distances. By collecting beacon signals from badges, bracelets, and various BLE sensors, it provides real-time insights into locations, movements, and environmental conditions. Whether you’re managing security staff, monitoring warehouse inventory, or overseeing event operations, the Indoor Bluetooth Gateway delivers low-power, high-efficiency connectivity to help you stay informed and in control.",
   "install_end_text": "",
   "device_annotation": "",
   "device_parameters": [],
